@@ -8,7 +8,7 @@
                     <h2 class="p-3">Registration</h2>
                 </div>
                 <div class="alert alert-dark" role="alert" v-if="error.length > 0">
-                        {{error}}
+                    {{error}}
                 </div>
                 <!-- {{first_name}}
                 {{last_name}}
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="mb-4 form-group">
-                            <label for="" >Selact role</label>
+                            <label for="">Selact role</label>
                             <select v-model="role_as" class="form-control">
                                 <option selected value="">select role</option>
                                 <option value="1">Admin</option>
@@ -52,7 +52,7 @@
                                 <option value="4">Inten</option>
                             </select>
                         </div>
-                        
+
                         <div class="mb-4">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" v-model="password" />
@@ -63,11 +63,12 @@
                         </div>
                         <div class="d-grid">
                             <!-- <button type="submit" class="btn text-light main-bg">Registration</button> -->
-                            <button  class="btn btn-danger" v-bind="clear">Registration</button>
+                            <button class="btn btn-danger" v-bind="clear">Registration</button>
                         </div>
                     </form>
                 </div>
             </div>
+            <notifications />
             <pre v-if="resualt">
                   <!-- {{resualt.data.tokan}} -->
                   {{resualt}}
@@ -79,6 +80,7 @@
 
 <script>
 import axios from 'axios';
+
 // import { Form, Field, ErrorMessage } from 'vee-validate';
 export default {
     name: 'ragistration',
@@ -95,45 +97,54 @@ export default {
             resualt: null,
         }
     },
-    methods:{
-      onSubmit(){
-          if(this.first_name != null && this.last_name != null&& this.email != null&&this.gender != null&&this.role_as != null&&this.password != null){
-
-            const options = {
-                        'first_name':this.first_name,
-                        'last_name':this.last_name,
-                        'email': this.email,
-                        'gender':this.gender,
-                        'role_as':this.role_as,
-                        'password': this.password,
-                        'cpassword': this.cpassword,
+    methods: {
+        onSubmit() {
+            if (this.first_name != null && this.last_name != null && this.email != null && this.gender != null && this.role_as != null && this.password != null) {
+                const options = {
+                    'first_name': this.first_name,
+                    'last_name': this.last_name,
+                    'email': this.email,
+                    'gender': this.gender,
+                    'role_as': this.role_as,
+                    'password': this.password,
+                    'cpassword': this.cpassword,
                 };
-             let resualt = axios.post('http://localhost:8000/api/user/ragister', options)
-               .then(resp => {
-                if(resp.data.tokan){
-                  sessionStorage.setItem("token", resp.data.tokan);
-                }else if(resp.data.massage){
-                    this.error.push(resp.data.massage)
-                }
-                
-                  this.resualt = resp;
-                    this.error.push(resp.data.massage)
-            })
-            .catch(() => {
-                    console.warn('Some error occurred. Please try again!')
-                    this.error.push('Some error occurred. Please try again!');
-                    this.resualt = resp;
-            });
-
-          }else {
-            this.error.push('form not valid');
-          }                             
-
-      },
-      
-      
+                let resualt = axios.post('http://localhost:8000/api/user/ragister', options)
+                    .then(resp => {
+                        if (resp.data.status == 200) {
+                            console.warn('ok');
+                            // if(resp.data.tokan){
+                            sessionStorage.setItem("token", resp.data.tokan);
+                            this.$notify({
+                                type: "success",
+                                title: "Important message",
+                                text: resp.data.message,
+                            });
+                            setTimeout(() => {
+                               window.location = "http://localhost:8000/signin";
+                            }, 3000);
+                            // this.error.push(resp.data.message)
+                        } else if (resp.data.status == 409) {
+                            // console.warn('denger');
+                            this.$notify({
+                                type: "wrong",
+                                title: "Important message",
+                                text: resp.data.message,
+                            });
+                            // this.error.push(resp.data.message)
+                        }
+                        this.resualt = resp;
+                        // this.error.push(resp.data.message)
+                    })
+                    .catch(() => {
+                        console.warn('Some error occurred. Please try again!')
+                        this.error.push('Some error occurred. Please try again!');
+                        this.resualt = resp;
+                    });
+            } else {
+                this.error.push('form not valid');
+            }
+        },
     }
-   
-   
 }
 </script>

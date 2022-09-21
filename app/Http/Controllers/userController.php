@@ -55,7 +55,10 @@ class userController extends Controller
         }
 
         if (User::where('email', $request->email)->first()) {
-            return response(['message' => 'email alrady exist'], 404);
+            return response([
+                'status' => 409,
+                'message' => 'email alrady exist'
+            ], 200);
         }
         
         // return response([
@@ -74,9 +77,10 @@ class userController extends Controller
         $token = $insert_user->createToken($request->email)->plainTextToken;
 
         return response([
+            'status' => 200,
             'tokan' => $token,
             'message' => 'user registred',
-        ], 201);
+        ], 200);
     }
 
     /**
