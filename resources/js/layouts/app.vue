@@ -8,6 +8,8 @@ import Header_components from '../components/Header.vue'
 export default {
   components :{
     Header_components,
-  }
+  },
+ 
+
 }
 </script>

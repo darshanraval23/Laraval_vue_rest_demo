@@ -11,11 +11,11 @@ use App\Models\salary;
 use Laravel\Sanctum\Sanctum; 
 
 
+//user logout rout
+Route::post("user/logout",[userController::class ,"logout"])->middleware('auth:sanctum');
 //protected routs
-// Route::group(['middleware' => 'auth:sanctum'], function(){
+Route::group(['middleware' => 'auth:sanctum'], function(){
 
-    //user logout rout
-    Route::post("user/logout",[userController::class ,"logout"]);
     //view all  user 
     Route::get("viewusers",[userController::class ,"index"]);
 
@@ -38,7 +38,7 @@ use Laravel\Sanctum\Sanctum;
     //delate employe salary recode
     Route::post("user/delatesalary/{id}",[salaryController::class, "delate_salary"]);
 
-// });
+});
  
 
 //public routs

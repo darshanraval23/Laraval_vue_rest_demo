@@ -112,9 +112,8 @@ export default {
                 let resualt = axios.post('http://localhost:8000/api/user/ragister', options)
                     .then(resp => {
                         if (resp.data.status == 200) {
-                            console.warn('ok');
                             // if(resp.data.tokan){
-                            sessionStorage.setItem("token", resp.data.tokan);
+                            // sessionStorage.setItem("token", resp.data.tokan);
                             this.$notify({
                                 type: "success",
                                 title: "Important message",
@@ -142,6 +141,11 @@ export default {
                         this.resualt = resp;
                     });
             } else {
+                 this.$notify({
+                                type: "wrong",
+                                title: "Important message",
+                                text: "form not valid",
+                            });
                 this.error.push('form not valid');
             }
         },

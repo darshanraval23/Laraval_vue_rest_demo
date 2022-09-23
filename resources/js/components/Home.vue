@@ -17,6 +17,7 @@
     </tr>
   </thead>
   <!-- {{employees}} -->
+  
   <tbody v-for="item in employees" :key="item.id">
     <tr>
       <td>{{item.id}}</td>
@@ -48,12 +49,10 @@ export default {
     },
     methods: {
         async getlist() {
-          console.warn('ok');
             let resualt = await axios.get("http://127.0.0.1:8000/api/user/employsalary");
             this.employees = resualt.data;
             // console.warn(this.employees[0]);
         },
-
     },
     created() {
       this.getlist();
