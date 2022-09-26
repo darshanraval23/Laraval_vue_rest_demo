@@ -30,13 +30,13 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post("user/add_salary",[salaryController::class, "add_salary"]);
     
     //view employe salary
-    Route::post("user/viewsalary/{id}",[salaryController::class, "view_salary"]);
+    Route::get("user/viewsalary/{id}",[salaryController::class, "view_salary"]);
     
     //update employe salary
     Route::put("user/updatesalary/{id}",[salaryController::class, "update_salary"]);
  
     //delate employe salary recode
-    Route::post("user/delatesalary/{id}",[salaryController::class, "delate_salary"]);
+    Route::delete("user/delatesalary/{id}",[salaryController::class, "delate_salary"]);
 
 });
  

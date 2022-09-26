@@ -44,11 +44,12 @@ class salaryController extends Controller
     {
         $employee_details =  salary::all()->where('user_id', $id);
         if (!$employee_details->isEmpty()) {
-            return response($employee_details, 200);
+            return response($employee_details[1], 200);
         } else {
             return response([
+                'status'=>404,
                 'massage' => 'Recde could not be found!'
-            ], 201);
+            ], 200);
         }
     }
 
@@ -56,9 +57,42 @@ class salaryController extends Controller
      * update Employee salary.
      * perms Employee id
      */
-    public function update_salary($id)
+    public function update_salary(Request $request)
     {
-        return 'hh';
+        $validate = Validator::make(
+            $request->all(),
+            [
+                "user_id" => "required",
+                "total_leaves_of_emp" => "required|max:10",
+                "calculated_salary" => "required",
+                "total_holiday" => "required",
+                "working_day" => "required|gt:20",
+                "emp_bonus" => "required",
+                "emp_paybal_salary" => "required"
+            ]
+        );
+        if ($validate->fails()) {
+            return response([$validate->errors()], 200);
+        }
+        $update_recode = salary::where('user_id', $request->user_id)
+                        ->update(['total_leaves_of_emp' => $request->total_leaves_of_emp,
+                        'calculated_salary' =>$request->calculated_salary,
+                        'total_holiday'=>$request->total_holiday,
+                        'working_day' =>$request->working_day,
+                        'emp_bonus'=> $request->emp_bonus,
+                        'emp_paybal_salary'=>$request->emp_paybal_salary
+                        ]);
+        if($update_recode){
+            return response([
+                'status'=> 200, 
+                'message' => 'Updated salary successfully!'
+            ], 200);
+        }else {
+            return response([
+                'status'=> 404, 
+                'message' => 'Nothing has changed!'
+            ], 200);
+        }
     }
     /**
      * delate Employee salary recode.
@@ -66,7 +100,19 @@ class salaryController extends Controller
      */
     public function delate_salary($id)
     {
-        return 'hh';
+        $salary_obj = salary::where('user_id', $id)
+                        ->delete();
+        if($salary_obj){
+            return response([
+                'status'=> 200, 
+                'message' => 'Recode Delated successfully!'
+            ], 200);
+        }else {
+            return response([
+                'status'=> 404, 
+                'message' => 'Recode has not Delated successfully!'
+            ], 200);
+        }
     }
 
     /**
@@ -88,12 +134,12 @@ class salaryController extends Controller
             ]
         );
         if ($validate->fails()) {
-            return response([$validate->errors()], 404);
-        }
+            return response([$validate->errors()], 200);
+        }   
         $ldate =  Carbon::now()->toDateString();
         // return $ldate;
         //  if(salary::all()->where('created_on',$ldate)){
-        //     return response(salary::all()->where('created_on',$ldate), 404);
+        //     return response(salary::all()->where('created_on',$ldate), 200);
         // }
         $salary_obj = new salary;
         $salary_obj->user_id = $request->user_id;
@@ -107,6 +153,6 @@ class salaryController extends Controller
 
         return response([
             'massage' => 'Employee salary has been added'
-        ], 201);
+        ], 200);
     }
 }

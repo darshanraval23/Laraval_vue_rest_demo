@@ -31,12 +31,8 @@ const routes = [
   //user auth routs
   {
     path: "/Employee",
-    // name: "Employee.add_salary",
     component: index,
     props: true,
-    meta: {
-      requiresAuth: true
-    },
     children:[
       {
       path: "child",
@@ -46,35 +42,16 @@ const routes = [
   },
   { 
     path: "/Employee/pay_salary",
-    // name: "Employee.add_salary",
     component: pay_salary,
-    // props: true
   },
   {
-    path: "/Employee/edit_salary",
-    // name: "edit_salary",
+    path: "/Employee/:id/edit_salary/",
+    name: "edit_salary",
     component: edit_salary,
     props: true
-  }
+  },
+  
 ];
-
-// router.beforeEach((to, from, next) => {
-//   const authUser = store.getters["auth/authUser"];
-//   const reqAuth = to.matched.some((record) => record.meta.requiresAuth);
-//   const loginQuery = { path: "/login", query: { redirect: to.fullPath } };
-
-//   if (reqAuth && !authUser) {
-//     store.dispatch("auth/getAuthUser").then(() => {
-//       if (!store.getters["auth/authUser"]) {
-//         next(loginQuery);
-//       } else {
-//         next();
-//       }
-//     });
-//   } else {
-//     next(); // make sure to always call next()!
-//   }
-// });
 
 const router = createRouter({
   history: createWebHistory(),

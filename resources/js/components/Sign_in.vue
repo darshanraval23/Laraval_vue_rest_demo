@@ -105,30 +105,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-/* :root {
-    --main-bg: #e91e63;
-}
-
-.main-bg {
-    background: var(--main-bg) !important;
-}
-
-input:focus,
-button:focus {
-    border: 1px solid var(--main-bg) !important;
-    box-shadow: none !important;
-}
-
-.form-check-input:checked {
-    background-color: var(--main-bg) !important;
-    border-color: var(--main-bg) !important;
-}
-
-.card,
-.btn,
-input {
-    border-radius: 0 !important;
-} */
-</style>

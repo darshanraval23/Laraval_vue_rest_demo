@@ -43,7 +43,7 @@ export default {
         async getlist() {
           let resualt = await axios.get("http://localhost:8000/api/viewusers");
             this.employees = resualt.data.data;
-            console.warn(resualt);
+            // console.warn(resualt);
         },
     },
     created() {

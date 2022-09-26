@@ -10,13 +10,6 @@
                 <div class="alert alert-dark" role="alert" v-if="error.length > 0">
                     {{error}}
                 </div>
-                <!-- {{first_name}}
-                {{last_name}}
-                {{email}}
-                {{gender}}
-                {{role_as}}
-                {{password}}
-                {{cpassword}} -->
                 <div class="card-body">
                     <form @submit.prevent="onSubmit">
                         <div class="mb-4">

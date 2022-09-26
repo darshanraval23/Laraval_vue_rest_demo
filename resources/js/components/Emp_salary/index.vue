@@ -14,7 +14,7 @@
       <td>calculated_salary</td>
       <td>emp_bonus</td>
       <td>paybale date</td>
-      <td>action</td>
+      <td colspan="2" style="text-align: center">action</td>
     </tr>
   </thead>
   <!-- {{employees}} -->
@@ -31,11 +31,14 @@
       <td>{{item.calculated_salary}}</td>
       <td>{{item.emp_bonus}}</td>
       <td>{{item.created_on}}</td>
-      <!-- <td><router-link :to="{ name: 'ProductEdit', v-bind:id=item.id }" class="btn">Edit</router-link></td> -->
-      <!-- <td><button class="btn btn-success" :to="/" @click="edit_salary">Edit</button></td> -->
-      <!-- <td><button>Edits</button></td> -->
+      <td><router-link :to="{ name: 'edit_salary', params: { id:item.user_id } }" class="btn">Edit</router-link></td>
+      <td><button  @click="delate_salary(item.user_id)" class="btn">Delate</button></td>
+
     </tr>   
   </tbody>
+
+
+
 
 </table>
 </template>
@@ -55,10 +58,27 @@ export default {
         async getlist() {
             let resualt = await axios.get("http://127.0.0.1:8000/api/user/employsalary");
             this.employees = resualt.data;
-            console.warn(resualt);
+            // console.warn(resualt);
         },
-        edit_salary(){
-            console.log(this.id);
+       delate_salary(id){
+            let resualt = axios.delete('http://127.0.0.1:8000/api/user/delatesalary/' + id,)
+                .then(resp => {
+                    if(resp.data.status == 404) {
+                        this.$notify({
+                            type: "error",
+                            title: "Important message",
+                            text: resp.data.message,
+                        });
+
+                    } else if (resp.data.status == 200) {
+                        this.$notify({
+                            type: "success",
+                            title: "Important message",
+                            text: resp.data.message,
+
+                        });
+                    }
+                }); 
         }
     },
     created() {

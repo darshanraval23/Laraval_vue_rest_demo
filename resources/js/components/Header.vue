@@ -67,13 +67,15 @@ export default {
         }
     },
     mounted() {
-      console.log(this.token);
+      console.warn(this.token);// employee auth token
+    //   axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    //   axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+
+      //set employee auth token in headers in axios
       axios.defaults.headers.common['Authorization'] = 'Bearer '+this.token;
     },
-
 };
 </script>
-
 <style scoped>
 nav li:hover,
 nav li.router-link-active,
