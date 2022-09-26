@@ -83,9 +83,9 @@ export default {
                             });
                             console.log('login');
                             sessionStorage.setItem("token", resp.data.token);
-                             setTimeout(() => {
+                            //  setTimeout(() => {
                                window.location = "http://localhost:8000/";
-                            }, 3000);
+                            // }, 3000);
                         }
                     })
                     .catch(error=> {

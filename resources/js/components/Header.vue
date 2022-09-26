@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <router-link to="Employee" class="nav-link" aria-current="page">Employe salary</router-link>
+                    <router-link to="/Employee" class="nav-link" aria-current="page">Employe salary</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/Employee/add_salary" class="nav-link">Add Employe salary</router-link>
+                    <router-link to="/Employee/pay_salary" class="nav-link">pay Employe salary</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/Employee/edit_salary" class="nav-link">Edit Employe salary</router-link>

@@ -26,8 +26,12 @@ class userController extends Controller
         // return $demo2;
 
         //using quarybuilder
-        $demo3 = DB::select('SELECT * FROM users');
-        return $demo3;
+        $employess = DB::select('SELECT * FROM users');
+        return response([
+            'status' => 200,
+            'message' => 'email alrady exist',
+            'data' => $employess
+        ], 200);
     }
 
     /**

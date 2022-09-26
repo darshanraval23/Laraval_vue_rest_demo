@@ -119,9 +119,9 @@ export default {
                                 title: "Important message",
                                 text: resp.data.message,
                             });
-                            setTimeout(() => {
+                            // setTimeout(() => {
                                window.location = "http://localhost:8000/signin";
-                            }, 3000);
+                            // }, 3000);
                             // this.error.push(resp.data.message)
                         } else if (resp.data.status == 409) {
                             // console.warn('denger');
