@@ -6,9 +6,10 @@
       <td>Emmployee id</td>
       <td>Name</td>
       <td>Email</td>
-      <td>gender</td>
-      <td>role_as</td>
-      <td>salary</td>
+      <td>Gender</td>
+      <td>Role as</td>
+      <td>Salary</td>
+      <td>Action</td>
     </tr>
   </thead>
   <!-- {{employees}} -->
@@ -22,6 +23,7 @@
       <td>{{item.role_as}}</td>
       <td v-if="item.salary != null" >{{item.salary}}</td>
       <td v-else>not set</td>
+      <td><router-link :to="{ name: 'pay_salary', params: { id:item.id } }" >pay salary</router-link></td>
       <!-- <td><button>Edits</button></td> -->
     </tr>
   </tbody>

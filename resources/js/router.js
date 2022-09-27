@@ -32,6 +32,7 @@ const routes = [
   {
     path: "/Employee",
     component: index,
+    name: 'Employee',
     props: true,
     children:[
       {
@@ -41,8 +42,10 @@ const routes = [
     ],
   },
   { 
-    path: "/Employee/pay_salary",
+    path: "/Employee/pay_salary/:id",
+    name: 'pay_salary',
     component: pay_salary,
+    props:true
   },
   {
     path: "/Employee/:id/edit_salary/",

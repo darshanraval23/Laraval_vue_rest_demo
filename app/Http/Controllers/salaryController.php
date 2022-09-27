@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
+use Psr\Http\Message\RequestInterface;
+
 // use Validator;
 
 
@@ -42,9 +44,9 @@ class salaryController extends Controller
      */
     public function view_salary($id)
     {
-        $employee_details =  salary::all()->where('user_id', $id);
-        if (!$employee_details->isEmpty()) {
-            return response($employee_details[1], 200);
+        $employee_details = salary::where('id', $id)->first();       
+        if ($employee_details){
+            return response($employee_details, 200);
         } else {
             return response([
                 'status'=>404,
@@ -98,9 +100,13 @@ class salaryController extends Controller
      * delate Employee salary recode.
      * perms Employee id
      */
-    public function delate_salary($id)
+    public function delate_salary(Request $req)
     {
-        $salary_obj = salary::where('user_id', $id)
+        // return $req->all();
+        $salary_obj = salary::where([
+            ['user_id','=',$req->employees_id],
+            ['created_on','=',$req->created_on],
+            ])
                         ->delete();
         if($salary_obj){
             return response([
@@ -116,10 +122,10 @@ class salaryController extends Controller
     }
 
     /**
-     * add Employee salary.
+     * pay Employee salary.
      * perms Employee data
      */
-    public function add_salary(Request $request)
+    public function pay_salary(Request $request)
     {
         $validate = Validator::make(
             $request->all(),
@@ -134,7 +140,11 @@ class salaryController extends Controller
             ]
         );
         if ($validate->fails()) {
-            return response([$validate->errors()], 200);
+            // return response()->json($validate->errors(), 200);
+            return response([
+                'status'=> 404, 
+                'message' => $validate->errors()
+            ], 200);
         }   
         $ldate =  Carbon::now()->toDateString();
         // return $ldate;
@@ -152,7 +162,8 @@ class salaryController extends Controller
         $salary_obj->save();
 
         return response([
-            'massage' => 'Employee salary has been added'
+            'status'=> 200, 
+            'message' => 'Employee salary has been added!'
         ], 200);
     }
 }

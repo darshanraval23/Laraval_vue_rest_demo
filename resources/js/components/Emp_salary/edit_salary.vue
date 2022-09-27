@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div class="align-items-center">
-         <notifications position="bottom right" />
+        <notifications position="bottom right" />
         <form class="requires-validation" novalidate>
             <div class="col-md-6 mt-2">
                 <label for="">employee leave</label>
@@ -43,7 +43,7 @@ import axios from 'axios';
 import {
     useRouter,
     useRoute
-} from 'vue-router';
+} from 'vue-router'
 export default {
     name: 'edit_salary',
     props: {
@@ -51,22 +51,32 @@ export default {
     },
     data() {
         return {
-            formdata: null,
+            formdata: {
+                'emp_paybal_salary': null,
+                'emp_bonus': null,
+                'working_day': null,
+                'total_holiday': null,
+                'calculated_salary': null,
+                'total_leaves_of_emp': null,
+            },
         }
     },
     methods: {
         async getlist() {
             let resualt = await axios.get('http://127.0.0.1:8000/api/user/viewsalary/' + this.$route.params.id)
                 .then(resp => {
+                    // console.warn(resp.data.user_id);
+
                     this.formdata = resp.data;
                 });
             // console.warn(resualt);
         },
         updated_emp_salary() {
-            // console.log(this.formdata);
+            const router = useRouter();
+            // console.log(router);
             let resualt = axios.put('http://127.0.0.1:8000/api/user/updatesalary/' + this.$route.params.id, this.formdata)
                 .then(resp => {
-                    if(resp.data.status == 404) {
+                    if (resp.data.status == 404) {
                         this.$notify({
                             type: "error",
                             title: "Important message",
@@ -79,8 +89,8 @@ export default {
                             type: "success",
                             title: "Important message",
                             text: resp.data.message,
-
                         });
+                       this.$router.push("/Employee");
                     }
                 });
         }

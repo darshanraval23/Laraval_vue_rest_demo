@@ -26,8 +26,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     //view all employe salary
     Route::get("user/employsalary",[salaryController::class, "show"]);
     
-    //add employe salary
-    Route::post("user/add_salary",[salaryController::class, "add_salary"]);
+    //pay employe salary
+    Route::post("user/pay_salary",[salaryController::class, "pay_salary"]);
     
     //view employe salary
     Route::get("user/viewsalary/{id}",[salaryController::class, "view_salary"]);
@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::put("user/updatesalary/{id}",[salaryController::class, "update_salary"]);
  
     //delate employe salary recode
-    Route::delete("user/delatesalary/{id}",[salaryController::class, "delate_salary"]);
+    Route::post("user/delatesalary",[salaryController::class, "delate_salary"]);
 
 });
  

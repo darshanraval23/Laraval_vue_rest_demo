@@ -1,6 +1,7 @@
 <template>
 <h1>List of paid salary employees</h1>
 <router-view></router-view>
+<notifications position="bottom right"/>
 <table class="table">
   <thead>
     <tr>
@@ -13,6 +14,7 @@
       <td>total_leaves_of_emp</td>
       <td>calculated_salary</td>
       <td>emp_bonus</td>
+      <td>paybal salary </td>
       <td>paybale date</td>
       <td colspan="2" style="text-align: center">action</td>
     </tr>
@@ -30,16 +32,13 @@
       <td>{{item.total_leaves_of_emp}}</td>
       <td>{{item.calculated_salary}}</td>
       <td>{{item.emp_bonus}}</td>
+      <td>{{item.emp_paybal_salary}}</td>
       <td>{{item.created_on}}</td>
-      <td><router-link :to="{ name: 'edit_salary', params: { id:item.user_id } }" class="btn">Edit</router-link></td>
-      <td><button  @click="delate_salary(item.user_id)" class="btn">Delate</button></td>
+      <td><router-link :to="{ name: 'edit_salary', params: { id:item.id } }" class="btn">Edit</router-link></td>
+      <td><button  @click="delate_salary(item.user_id,item.created_on)" class="btn">Delate</button></td>
 
     </tr>   
   </tbody>
-
-
-
-
 </table>
 </template>
 
@@ -60,8 +59,14 @@ export default {
             this.employees = resualt.data;
             // console.warn(resualt);
         },
-       delate_salary(id){
-            let resualt = axios.delete('http://127.0.0.1:8000/api/user/delatesalary/' + id,)
+       delate_salary(id,date){
+        const api_hedder = {
+            'employees_id' : id,
+            'created_on': date
+        };
+        // console.log(api_hedder);
+        const router = useRouter();
+            let resualt = axios.post('http://127.0.0.1:8000/api/user/delatesalary/', api_hedder)
                 .then(resp => {
                     if(resp.data.status == 404) {
                         this.$notify({
@@ -69,7 +74,6 @@ export default {
                             title: "Important message",
                             text: resp.data.message,
                         });
-
                     } else if (resp.data.status == 200) {
                         this.$notify({
                             type: "success",
@@ -77,6 +81,9 @@ export default {
                             text: resp.data.message,
 
                         });
+                        this.getlist();
+                        // window.location.reload()
+                        // this.router.go()
                     }
                 }); 
         }

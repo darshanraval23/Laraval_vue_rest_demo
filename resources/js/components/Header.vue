@@ -10,12 +10,6 @@
                 <li class="nav-item">
                     <router-link to="/Employee" class="nav-link" aria-current="page">Employe salary</router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link to="/Employee/pay_salary" class="nav-link">pay Employe salary</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link to="/Employee/edit_salary" class="nav-link">Edit Employe salary</router-link>
-                </li>              
                 <li class="nav-item" v-if="!token">
                     <router-link to="/signin" class="nav-link">Sign in</router-link>
                 </li>
