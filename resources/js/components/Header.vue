@@ -31,7 +31,8 @@ export default {
     name: "Header_componets",
     data() {
       return {
-        token : sessionStorage.getItem('token')
+        token : sessionStorage.getItem('token'),
+        error: []
       }
     },
     methods: {
@@ -46,9 +47,8 @@ export default {
                         });
                         sessionStorage.removeItem('token')
                         this.token = null;  
-                        setTimeout(() => {
-                            window.location= 'http://localhost:8000/signin'
-                        }, 3000);
+                        this.$router.push("/signin");                 
+                        // window.location= 'http://localhost:8000/signin'
 
                     } else if (resp.data.status == '404') {
                         this.$notify({
@@ -56,6 +56,7 @@ export default {
                             title: "Important message",
                             text: resp.data.message
                         });
+                        this.error = resp.data.message
                     }
                 })
         }
@@ -66,7 +67,7 @@ export default {
     //   axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 
       //set employee auth token in headers in axios
-      axios.defaults.headers.common['Authorization'] = 'Bearer '+this.token;
+    //   axios.defaults.headers.common['Authorization'] = 'Bearer '+this.token;
     },
 };
 </script>

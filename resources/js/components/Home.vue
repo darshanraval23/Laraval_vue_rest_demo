@@ -49,6 +49,8 @@ export default {
         },
     },
     created() {
+     axios.defaults.headers.common['Authorization'] = 'Bearer '+sessionStorage.getItem('token');
+
       const router = useRouter();
       if(!sessionStorage.getItem('token')){
         router.push('/signin');

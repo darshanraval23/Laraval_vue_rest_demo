@@ -55,23 +55,15 @@ class userController extends Controller
             ]
         );
         if ($validator->fails()) {
-            return response([
-                'status' => 404,
-                'message' => json_encode($validator->errors()) 
-            ], 200);
+            return response()->json($validator->errors(), 404);
         }
 
         if (User::where('email', $request->email)->first()) {
-            return response([
-                'status' => 409,
-                'message' => 'email alrady exist'
-            ], 200);
+            return response()->json([
+                'message' => ['email alrady exist']
+             ], 404);
         }
-        
-        // return response([
-        //     'tokan' => $request->input(),
-        //     'massage' => 'user ragisted'
-        // ], 201);
+    
         $insert_user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -80,14 +72,8 @@ class userController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-
         // $token = $insert_user->createToken($request->email)->plainTextToken;
-
-        return response([
-            'status' => 200,
-            // 'tokan' => $token,
-            'message' => 'user registred',
-        ], 200);
+        return response(['message' => 'user registred'], 200);
     }
 
     /**
@@ -105,18 +91,12 @@ class userController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response([
-                'status'=> 404,
-                'message'=> $validator->errors()->toJson()
-            ], 200);
+            return response()->json($validator->errors(), 404);
         } else {
             $user = User::where('email', $request->email)->first();
             // return response($user->password);
             if (!$user || !Hash::check($request->password, $user->password)) {
-                return response([
-                    'status'=> 404,
-                    'message' => ['These credentials do not match our records.']
-                ], 200);
+                return response()->json(['message' => ['These credentials do not match our records.']], 404);
             }
 
             $token = $user->createToken($request->email)->plainTextToken;
@@ -126,12 +106,15 @@ class userController extends Controller
                 'user' => $user,
                 'token' => ''
             ];
-
-            return response([
-                'status'=> 200,
-                'message'=> "login sucsses",
-                'token' => $token
+            return response()->json([
+                'message' => 'SUCCESS',
+                'token' => $token,
             ], 200);
+            // return response([
+            //     'status'=> 200,
+            //     'message'=> "login sucsses",
+            //     'token' => $token
+            // ], 200);
         }
     }
     /**
@@ -140,7 +123,6 @@ class userController extends Controller
      */
     public function logout(Request $request)
     { 
-        
         // return response($request->bearerToken());
         if ($request->User()) { 
             $request->User()->tokens()->delete();

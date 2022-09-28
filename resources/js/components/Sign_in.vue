@@ -9,19 +9,30 @@
                 </div>
                 <div class="card-body">
                     <notifications position="bottom right" />
-                    <div class="alert alert-dark" role="alert" v-if="error">
-                        <pre>
-                        {{error}}
-                        </pre>
+                    <!-- form error message -->
+                    <div class="alert alert-danger" v-if="Object.keys(error).length">
+                        <p class="mb-0"><strong>Whoops!</strong> Something went wrong!</p>
+                        <br>
+                        <!-- <ul> -->
+                        <ul v-for="(v, k) in error" :key="k">
+                            <li v-for="(v, k) in v" :key="k">
+                                {{v}}
+                            </li>
+                        </ul>
+                        <!-- </ul> -->
                     </div>
+
                     <form>
                         <div class="mb-4">
-                            <label for="username" class="form-label">Username/Email</label>
+                            <label for="username" class="form-label">Email</label>
                             <input type="text" class="form-control" id="username" v-model="email" />
+                            <span v-if="error.email">{{error.email[0]}}</span>
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" v-model="password" />
+                            <span v-if="error.password">{{error.password[0]}}</span>
+
                         </div>
                         <div class="d-grid">
                             <!-- <button type="submit" class="btn text-light main-bg">Login</button> -->
@@ -37,16 +48,17 @@
 
 <script>
 import axios from 'axios';
-// import { notify } from "@kyvg/vue3-notification";
 export default {
     name: 'sgin_in',
     data() {
         return {
             email: null,
             password: null,
-            error: null,
+            error: Object,
+            token: null,
         }
     },
+
     methods: {
         login() {
             if (this.email == 465 || this.password == 54) {
@@ -64,43 +76,25 @@ export default {
                 };
                 let resualt = axios.post('http://localhost:8000/api/user/login', options)
                     .then(resp => {
-                        // this.error = resualt
-                        console.log(resp);
-                        if (resp.data.status == 404) {
-                            console.warn(resp)
-                            this.$notify({
-                                type: "error",
-                                title: "Important message",
-                                text: resp.data.message
-                            });
-
-                        } else if (resp.data.status == 200) {
-                            this.$notify({
-                                type: "success",
-                                title: "Important message",
-                                text: "login sucsees",
-                                
-                            });
-                            console.log('login');
-                            sessionStorage.setItem("token", resp.data.token);
-                            //  setTimeout(() => {
-                               window.location = "http://localhost:8000/";
-                            // }, 3000);
-                        }
-                    })
-                    .catch(error=> {
-                        console.log(error);
-                        if (errors.response.status === 401) {
-                            // localStorage.removeItem('token')
-                            // this.$router.push({ name: 'Login'})
-                        }
+                        this.$notify({
+                            type: "SUCCESS",
+                            title: "Important message",
+                            text: resp.data.message
+                        });
+                        // console.log('login');
+                        sessionStorage.setItem("token", resp.data.token);
+                        // this.$router.go('/')
+                        this.token = sessionStorage.getItem('token')
+                        this.$router.push({
+                            path: '/',
+                            replace: true
+                        })
+                    }).catch(e => {
+                        this.error = e.response.data
+                        // console.log(e);
                     });
             }
         }
-    },
-    mounted() {
-        // this.token = sessionStorage.getItem('token')
-        //  window.axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
     },
 
 }
