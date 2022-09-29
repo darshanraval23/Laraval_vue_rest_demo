@@ -48,3 +48,9 @@ Route::post("user/ragister",[userController::class ,"ragister"]);
 //user login 
 Route::post("user/login",[userController::class ,"login"]);
 
+//fall back routs
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'Page Not Found. If error persists, contact info@website.com'], 404);
+});
+

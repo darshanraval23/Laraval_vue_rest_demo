@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Exceptions;
-
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -15,7 +14,7 @@ class Handler extends ExceptionHandler
     protected $levels = [
         //
     ];
-
+    
     /**
      * A list of the exception types that are not reported.
      *

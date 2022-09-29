@@ -11,6 +11,8 @@ import edit_salary from "./components/Emp_salary/edit_salary.vue"
 //child components
 import child from "./components/child.vue"
 
+//vuex components
+import VuexEmployeeList from "./components/vuex/Employee.vue"
 const routes = [
   //home routs
   {
@@ -53,7 +55,13 @@ const routes = [
     component: edit_salary,
     props: true
   },
-  
+  // vuex routs
+  {
+    path: "/vuexEmployee",
+    name: "vuexEmployee",
+    component: VuexEmployeeList,
+    // props: true
+  },
 ];
 
 const router = createRouter({

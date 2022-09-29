@@ -19,6 +19,9 @@
                 <li class="nav-item">
                     <a @click="emplogout" v-if="token" class="nav-link">loge out</a>
                 </li>
+                <li class="nav-item">
+                   <router-link to="/vuexEmployee" class="nav-link">Vuex</router-link>
+                </li>
             </ul>
         </div>
     </div>
