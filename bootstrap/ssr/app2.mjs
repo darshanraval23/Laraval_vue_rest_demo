@@ -273,7 +273,7 @@ const _sfc_main$6 = {
           "email": this.email,
           "password": this.password
         };
-        axios.post("http://localhost:8000/api/user/login", options).then((resp) => {
+        axios.post("/api/user/login", options).then((resp) => {
           this.$notify({
             type: "SUCCESS",
             title: "Important message",
@@ -330,7 +330,7 @@ _sfc_main$6.setup = (props, ctx) => {
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
 const Signin = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["ssrRender", _sfc_ssrRender$6]]);
-const Registration_vue_vue_type_style_index_0_scoped_14c4c9e6_lang = "";
+const Registration_vue_vue_type_style_index_0_scoped_987a31b7_lang = "";
 const _sfc_main$5 = {
   name: "ragistration",
   data() {
@@ -357,7 +357,7 @@ const _sfc_main$5 = {
         "password": this.password,
         "cpassword": this.cpassword
       };
-      axios.post("http://localhost:8000/api/user/ragister", options).then((resp) => {
+      axios.post("/api/user/ragister", options).then((resp) => {
         console.log(resp);
         this.$notify({
           type: "success",
@@ -373,13 +373,13 @@ const _sfc_main$5 = {
 };
 function _sfc_ssrRender$5(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
   const _component_notifications = resolveComponent("notifications");
-  _push(`<div${ssrRenderAttrs(mergeProps({ class: "container" }, _attrs))} data-v-14c4c9e6><div class="row justify-content-center mt-5" data-v-14c4c9e6><div class="col-lg-4 col-md-6 col-sm-6" data-v-14c4c9e6><div class="card shadow" data-v-14c4c9e6><div class="card-title text-center border-bottom" data-v-14c4c9e6><h2 class="p-3" data-v-14c4c9e6>Registration</h2></div>`);
+  _push(`<div${ssrRenderAttrs(mergeProps({ class: "container" }, _attrs))} data-v-987a31b7><div class="row justify-content-center mt-5" data-v-987a31b7><div class="col-lg-4 col-md-6 col-sm-6" data-v-987a31b7><div class="card shadow" data-v-987a31b7><div class="card-title text-center border-bottom" data-v-987a31b7><h2 class="p-3" data-v-987a31b7>Registration</h2></div>`);
   if (Object.keys($data.error).length) {
-    _push(`<div class="alert alert-danger" data-v-14c4c9e6><p class="mb-0" data-v-14c4c9e6><strong data-v-14c4c9e6>Whoops!</strong> Something went wrong!</p><br data-v-14c4c9e6><!--[-->`);
+    _push(`<div class="alert alert-danger" data-v-987a31b7><p class="mb-0" data-v-987a31b7><strong data-v-987a31b7>Whoops!</strong> Something went wrong!</p><br data-v-987a31b7><!--[-->`);
     ssrRenderList($data.error, (v, k) => {
-      _push(`<ul data-v-14c4c9e6><!--[-->`);
+      _push(`<ul data-v-987a31b7><!--[-->`);
       ssrRenderList(v, (v2, k2) => {
-        _push(`<li data-v-14c4c9e6>${ssrInterpolate(v2)}</li>`);
+        _push(`<li data-v-987a31b7>${ssrInterpolate(v2)}</li>`);
       });
       _push(`<!--]--></ul>`);
     });
@@ -387,49 +387,49 @@ function _sfc_ssrRender$5(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
   } else {
     _push(`<!---->`);
   }
-  _push(`<div class="card-body" data-v-14c4c9e6><form data-v-14c4c9e6><div class="mb-4" data-v-14c4c9e6><label for="firstname" class="form-label" data-v-14c4c9e6>First Name</label><input type="text" class="form-control" id="firstname"${ssrRenderAttr("value", $data.first_name)} data-v-14c4c9e6>`);
+  _push(`<div class="card-body" data-v-987a31b7><form data-v-987a31b7><div class="mb-4" data-v-987a31b7><label for="firstname" class="form-label" data-v-987a31b7>First Name</label><input type="text" class="form-control" id="firstname"${ssrRenderAttr("value", $data.first_name)} data-v-987a31b7>`);
   if ($data.error.first_name) {
-    _push(`<span data-v-14c4c9e6>${ssrInterpolate($data.error.first_name[0])}</span>`);
+    _push(`<span data-v-987a31b7>${ssrInterpolate($data.error.first_name[0])}</span>`);
   } else {
     _push(`<!---->`);
   }
-  _push(`</div><div class="mb-4" data-v-14c4c9e6><label for="lastname" class="form-label" data-v-14c4c9e6>Last Name</label><input type="text" name="lastname" class="form-control" id="lastname"${ssrRenderAttr("value", $data.last_name)} data-v-14c4c9e6>`);
+  _push(`</div><div class="mb-4" data-v-987a31b7><label for="lastname" class="form-label" data-v-987a31b7>Last Name</label><input type="text" name="lastname" class="form-control" id="lastname"${ssrRenderAttr("value", $data.last_name)} data-v-987a31b7>`);
   if ($data.error.last_name) {
-    _push(`<span data-v-14c4c9e6>${ssrInterpolate($data.error.last_name[0])}</span>`);
+    _push(`<span data-v-987a31b7>${ssrInterpolate($data.error.last_name[0])}</span>`);
   } else {
     _push(`<!---->`);
   }
-  _push(`</div><div class="mb-4" data-v-14c4c9e6><label for="email" class="form-label" data-v-14c4c9e6>Email</label><input type="text" class="form-control" id="email"${ssrRenderAttr("value", $data.email)} data-v-14c4c9e6>`);
+  _push(`</div><div class="mb-4" data-v-987a31b7><label for="email" class="form-label" data-v-987a31b7>Email</label><input type="text" class="form-control" id="email"${ssrRenderAttr("value", $data.email)} data-v-987a31b7>`);
   if ($data.error.email) {
-    _push(`<span data-v-14c4c9e6>${ssrInterpolate($data.error.email[0])}</span>`);
+    _push(`<span data-v-987a31b7>${ssrInterpolate($data.error.email[0])}</span>`);
   } else {
     _push(`<!---->`);
   }
-  _push(`</div><label for="" class="form-label" data-v-14c4c9e6>Selact Gender</label><div class="mb-4" data-v-14c4c9e6><div class="form-check form-check-inline" data-v-14c4c9e6><input type="radio" class="form-check-input" name="male" value="male"${ssrIncludeBooleanAttr(ssrLooseEqual($data.gender, "male")) ? " checked" : ""} data-v-14c4c9e6><label for="male" class="form-check-label" data-v-14c4c9e6>Male</label></div><div class="form-check form-check-inline" data-v-14c4c9e6><input type="radio" class="form-check-input" name="female" value="female"${ssrIncludeBooleanAttr(ssrLooseEqual($data.gender, "female")) ? " checked" : ""} data-v-14c4c9e6><label for="female" class="form-check-label" data-v-14c4c9e6>Female</label></div>`);
+  _push(`</div><label for="" class="form-label" data-v-987a31b7>Selact Gender</label><div class="mb-4" data-v-987a31b7><div class="form-check form-check-inline" data-v-987a31b7><input type="radio" class="form-check-input" name="male" value="male"${ssrIncludeBooleanAttr(ssrLooseEqual($data.gender, "male")) ? " checked" : ""} data-v-987a31b7><label for="male" class="form-check-label" data-v-987a31b7>Male</label></div><div class="form-check form-check-inline" data-v-987a31b7><input type="radio" class="form-check-input" name="female" value="female"${ssrIncludeBooleanAttr(ssrLooseEqual($data.gender, "female")) ? " checked" : ""} data-v-987a31b7><label for="female" class="form-check-label" data-v-987a31b7>Female</label></div>`);
   if ($data.error.gender) {
-    _push(`<span data-v-14c4c9e6>${ssrInterpolate($data.error.gender[0])}</span>`);
+    _push(`<span data-v-987a31b7>${ssrInterpolate($data.error.gender[0])}</span>`);
   } else {
     _push(`<!---->`);
   }
-  _push(`</div><div class="mb-4 form-group" data-v-14c4c9e6><label for="" data-v-14c4c9e6>Selact role</label><select class="form-control" data-v-14c4c9e6><option selected value="" data-v-14c4c9e6>select role</option><option value="1" data-v-14c4c9e6>Admin</option><option value="2" data-v-14c4c9e6>User</option><option value="3" data-v-14c4c9e6>Hr</option><option value="4" data-v-14c4c9e6>Inten</option></select>`);
+  _push(`</div><div class="mb-4 form-group" data-v-987a31b7><label for="" data-v-987a31b7>Selact role</label><select class="form-control" data-v-987a31b7><option selected value="" data-v-987a31b7>select role</option><option value="1" data-v-987a31b7>Admin</option><option value="2" data-v-987a31b7>User</option><option value="3" data-v-987a31b7>Hr</option><option value="4" data-v-987a31b7>Inten</option></select>`);
   if ($data.error.role_as) {
-    _push(`<span data-v-14c4c9e6>${ssrInterpolate($data.error.role_as[0])}</span>`);
+    _push(`<span data-v-987a31b7>${ssrInterpolate($data.error.role_as[0])}</span>`);
   } else {
     _push(`<!---->`);
   }
-  _push(`</div><div class="mb-4" data-v-14c4c9e6><label for="password" class="form-label" data-v-14c4c9e6>Password</label><input type="password" class="form-control" id="password"${ssrRenderAttr("value", $data.password)} data-v-14c4c9e6>`);
+  _push(`</div><div class="mb-4" data-v-987a31b7><label for="password" class="form-label" data-v-987a31b7>Password</label><input type="password" class="form-control" id="password"${ssrRenderAttr("value", $data.password)} data-v-987a31b7>`);
   if ($data.error.password) {
-    _push(`<span data-v-14c4c9e6>${ssrInterpolate($data.error.password[0])}</span>`);
+    _push(`<span data-v-987a31b7>${ssrInterpolate($data.error.password[0])}</span>`);
   } else {
     _push(`<!---->`);
   }
-  _push(`</div><div class="mb-4" data-v-14c4c9e6><label for="cpassword" class="form-label" data-v-14c4c9e6>Conform Password</label><input type="password" class="form-control" id="cpassword"${ssrRenderAttr("value", $data.cpassword)} data-v-14c4c9e6>`);
+  _push(`</div><div class="mb-4" data-v-987a31b7><label for="cpassword" class="form-label" data-v-987a31b7>Conform Password</label><input type="password" class="form-control" id="cpassword"${ssrRenderAttr("value", $data.cpassword)} data-v-987a31b7>`);
   if ($data.error.cpassword) {
-    _push(`<span data-v-14c4c9e6>${ssrInterpolate($data.error.cpassword[0])}</span>`);
+    _push(`<span data-v-987a31b7>${ssrInterpolate($data.error.cpassword[0])}</span>`);
   } else {
     _push(`<!---->`);
   }
-  _push(`</div><div class="d-grid" data-v-14c4c9e6><button${ssrRenderAttrs(mergeProps({ class: "btn btn-danger" }, _ctx.clear))} data-v-14c4c9e6>Registration</button></div></form></div></div>`);
+  _push(`</div><div class="d-grid" data-v-987a31b7><button${ssrRenderAttrs(mergeProps({ class: "btn btn-danger" }, _ctx.clear))} data-v-987a31b7>Registration</button></div></form></div></div>`);
   _push(ssrRenderComponent(_component_notifications, null, null, _parent));
   _push(`</div></div></div>`);
 }
@@ -439,7 +439,7 @@ _sfc_main$5.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/components/Registration.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
-const Registration = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["ssrRender", _sfc_ssrRender$5], ["__scopeId", "data-v-14c4c9e6"]]);
+const Registration = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["ssrRender", _sfc_ssrRender$5], ["__scopeId", "data-v-987a31b7"]]);
 const _sfc_main$4 = {
   data() {
     return {

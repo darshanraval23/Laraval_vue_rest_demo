@@ -74,7 +74,7 @@ export default {
                     'email': this.email,
                     'password': this.password,
                 };
-                let resualt = axios.post('http://localhost:8000/api/user/login', options)
+                let resualt = axios.post('/api/user/login', options)
                     .then(resp => {
                         this.$notify({
                             type: "SUCCESS",

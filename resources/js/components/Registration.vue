@@ -113,7 +113,7 @@ export default {
                     'password': this.password,
                     'cpassword': this.cpassword,
                 };
-                let resualt = axios.post('http://localhost:8000/api/user/ragister', options)
+                let resualt = axios.post('/api/user/ragister', options)
                     .then(resp => {
                         console.log(resp);
                         this.$notify({
